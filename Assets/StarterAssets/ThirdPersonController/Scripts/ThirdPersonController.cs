@@ -101,6 +101,10 @@ namespace StarterAssets
         private int _animIDDoInteract;
         private int _animIDInteractType;
 
+
+        //my var
+
+
 #if ENABLE_INPUT_SYSTEM
         private PlayerInput _playerInput;
 #endif
@@ -170,6 +174,7 @@ namespace StarterAssets
         private void Update()
         {
             _hasAnimator = TryGetComponent(out _animator);
+
 
             JumpAndGravity();
             GroundedCheck();
@@ -421,9 +426,6 @@ namespace StarterAssets
                 _animator.SetBool(_animIDDoInteract, doInteract);
                 _animator.SetInteger(_animIDInteractType, animationType);
             }
-
-
-
         }
 
 

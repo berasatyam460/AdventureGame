@@ -568,7 +568,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1768514134011254726, guid: d9c96bece3fe6e54fb4a1daadbf8723f, type: 3}
       propertyPath: interactionNo
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1768514134011254726, guid: d9c96bece3fe6e54fb4a1daadbf8723f, type: 3}
       propertyPath: pointerWidget
@@ -1045,6 +1045,7 @@ GameObject:
   - component: {fileID: 3543048677028463423}
   - component: {fileID: 974238578037350223}
   - component: {fileID: 7018120648050226612}
+  - component: {fileID: 7018120648050226613}
   m_Layer: 8
   m_Name: PlayerArmature
   m_TagString: Player
@@ -3573,6 +3574,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionRange: 10
+--- !u!114 &7018120648050226613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974238578037350211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faff105fd565b494bb6c0dba6c41c81e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  torchSocket: {fileID: 5743254504153825521}
+  currentTorch: {fileID: 919132149199074806}
 --- !u!4 &7077314453118332836
 Transform:
   m_ObjectHideFlags: 0

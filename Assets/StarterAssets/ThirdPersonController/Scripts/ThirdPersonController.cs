@@ -1,4 +1,4 @@
-﻿ using UnityEngine;
+﻿using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -98,7 +98,10 @@ namespace StarterAssets
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
 
-#if ENABLE_INPUT_SYSTEM 
+        private int _animIDDoInteract;
+        private int _animIDInteractType;
+
+#if ENABLE_INPUT_SYSTEM
         private PlayerInput _playerInput;
 #endif
         private Animator _animator;
@@ -122,6 +125,18 @@ namespace StarterAssets
             }
         }
 
+        void OnEnable()
+        {
+            ActionManger.AnimationType += InteractAnim;
+
+        }
+        void OnDisable()
+        {
+            ActionManger.AnimationType -= InteractAnim;
+
+
+        }
+
 
         private void Awake()
         {
@@ -135,7 +150,7 @@ namespace StarterAssets
         private void Start()
         {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-            
+
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
@@ -159,6 +174,7 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
+            OnInteract();
         }
 
         private void LateUpdate()
@@ -173,6 +189,9 @@ namespace StarterAssets
             _animIDJump = Animator.StringToHash("Jump");
             _animIDFreeFall = Animator.StringToHash("FreeFall");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+            _animIDDoInteract = Animator.StringToHash("DoInteract");
+            _animIDInteractType = Animator.StringToHash("InteractionType");
+
         }
 
         private void GroundedCheck()
@@ -388,5 +407,28 @@ namespace StarterAssets
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
             }
         }
+        private void OnInteract()
+        {
+
+            ActionManger.DoInteract?.Invoke(_input.canInteract);
+
+        }
+
+        private void InteractAnim(bool doInteract, int animationType)
+        {
+            if (_hasAnimator)
+            {
+                _animator.SetBool(_animIDDoInteract, doInteract);
+                _animator.SetInteger(_animIDInteractType, animationType);
+            }
+
+
+
+        }
+
+
+
     }
+
+
 }

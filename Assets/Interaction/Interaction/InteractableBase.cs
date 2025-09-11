@@ -8,7 +8,7 @@ public abstract class InteractableBase : MonoBehaviour, IInteractable
     [Header("Interaction Info")]
     [SerializeField] private string interactKey = "E";
     [SerializeField] private string headerText = "Interact";
-    [SerializeField] [TextArea] private string toolTipText = "";
+    [SerializeField][TextArea] private string toolTipText = "";
     [SerializeField] private E_Interact_Type interactionType = E_Interact_Type.Press;
 
     private bool isHovered = false;
@@ -53,6 +53,7 @@ public abstract class InteractableBase : MonoBehaviour, IInteractable
 
     public virtual void Interact(GameObject interctingObject)
     {
+
         // To be overridden by derived class if needed
     }
 

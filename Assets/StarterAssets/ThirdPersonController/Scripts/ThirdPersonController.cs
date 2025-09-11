@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -103,7 +104,7 @@ namespace StarterAssets
 
 
         //my var
-
+        [SerializeField] GameObject lookAt;
 
 #if ENABLE_INPUT_SYSTEM
         private PlayerInput _playerInput;
@@ -419,13 +420,33 @@ namespace StarterAssets
 
         }
 
-        private void InteractAnim(bool doInteract, int animationType)
+        private void InteractAnim(bool doInteract, int animationType, GameObject interactorObj)
         {
             if (_hasAnimator)
             {
+                StartCoroutine(RotateTowardsTheIntaractableObj(interactorObj.transform, 0.3f));
                 _animator.SetBool(_animIDDoInteract, doInteract);
                 _animator.SetInteger(_animIDInteractType, animationType);
+
             }
+        }
+
+
+        private IEnumerator RotateTowardsTheIntaractableObj(Transform target, float duration)
+        {
+            Quaternion startRot = transform.rotation;
+            Vector3 lookDir = target.position - transform.position;
+            lookDir.y = 0f;
+            Quaternion targetRot = Quaternion.LookRotation(lookDir);
+
+            float time = 0;
+            while (time < duration)
+            {
+                transform.rotation = Quaternion.Slerp(startRot, targetRot, time / duration);
+                time += Time.deltaTime;
+                yield return null;
+            }
+            transform.rotation = targetRot;
         }
 
 

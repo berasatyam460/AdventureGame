@@ -7,8 +7,10 @@ public class LockMovement : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         var playerinput = animator.GetComponent<PlayerInput>();
+
         if (playerinput != null)
         {
+
             playerinput.enabled = false; // disable movement
         }
     }
@@ -20,6 +22,7 @@ public class LockMovement : StateMachineBehaviour
         if (playerinput != null)
         {
             playerinput.enabled = true; // enable movement
+
         }
     }
 }

@@ -2,14 +2,16 @@ using UnityEngine;
 
 public class AttachToSocket : MonoBehaviour
 {
-    [SerializeField] private Transform torchSocket;
-    [SerializeField] GameObject currentTorch;
+    [SerializeField] private Transform ScoketTransform;
+    [SerializeField] GameObject objectNeedToAttched;
 
     public void AttachTorch()
     {
-
-        currentTorch.transform.SetParent(torchSocket);
-        currentTorch.transform.localPosition = Vector3.zero;
-        currentTorch.transform.localRotation = Quaternion.identity;
+        var obj = GameObject.Instantiate(objectNeedToAttched);
+        obj.transform.SetParent(ScoketTransform);
+        obj.transform.localPosition = Vector3.zero;
+        obj.transform.localRotation = Quaternion.identity;
     }
+
+
 }

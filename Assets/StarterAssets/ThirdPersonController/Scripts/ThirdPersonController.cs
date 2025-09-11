@@ -110,7 +110,7 @@ namespace StarterAssets
         private PlayerInput _playerInput;
 #endif
         private Animator _animator;
-        private CharacterController _controller;
+        [HideInInspector] public CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
 
@@ -424,7 +424,7 @@ namespace StarterAssets
         {
             if (_hasAnimator)
             {
-                StartCoroutine(RotateTowardsTheIntaractableObj(interactorObj.transform, 0.3f));
+                //StartCoroutine(RotateTowardsTheIntaractableObj(interactorObj.transform, 0.3f));
                 _animator.SetBool(_animIDDoInteract, doInteract);
                 _animator.SetInteger(_animIDInteractType, animationType);
 
@@ -432,22 +432,22 @@ namespace StarterAssets
         }
 
 
-        private IEnumerator RotateTowardsTheIntaractableObj(Transform target, float duration)
-        {
-            Quaternion startRot = transform.rotation;
-            Vector3 lookDir = target.position - transform.position;
-            lookDir.y = 0f;
-            Quaternion targetRot = Quaternion.LookRotation(lookDir);
+        // private IEnumerator RotateTowardsTheIntaractableObj(Transform target, float duration)
+        // {
+        //     Quaternion startRot = transform.rotation;
+        //     Vector3 lookDir = target.position - transform.position;
+        //     lookDir.y = 0f;
+        //     Quaternion targetRot = Quaternion.LookRotation(lookDir);
 
-            float time = 0;
-            while (time < duration)
-            {
-                transform.rotation = Quaternion.Slerp(startRot, targetRot, time / duration);
-                time += Time.deltaTime;
-                yield return null;
-            }
-            transform.rotation = targetRot;
-        }
+        //     float time = 0;
+        //     while (time < duration)
+        //     {
+        //         transform.rotation = Quaternion.Slerp(startRot, targetRot, time / duration);
+        //         time += Time.deltaTime;
+        //         yield return null;
+        //     }
+        //     transform.rotation = targetRot;
+        // }
 
 
 

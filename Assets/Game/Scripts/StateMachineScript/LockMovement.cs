@@ -1,3 +1,4 @@
+using StarterAssets;
 using UnityEngine;
 
 using UnityEngine.InputSystem;
@@ -19,10 +20,11 @@ public class LockMovement : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         var playerinput = animator.GetComponent<PlayerInput>();
+        var playercontroller = animator.GetComponent<ThirdPersonController>();
         if (playerinput != null)
         {
             playerinput.enabled = true; // enable movement
-
+            playercontroller._controller.enabled = true;
         }
     }
 }

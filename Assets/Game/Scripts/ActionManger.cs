@@ -11,4 +11,6 @@ public static class ActionManger
     public static System.Action headTrackOff;
 
     public static System.Action<bool, int, GameObject> AnimationType;
+
+    public static Action InteractAnimFinish;
 }

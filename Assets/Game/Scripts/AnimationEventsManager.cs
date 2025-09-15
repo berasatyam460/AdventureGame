@@ -6,4 +6,9 @@ public class AnimationEventsManager : MonoBehaviour
     {
         ActionManger.headTrackOff?.Invoke();
     }
+
+    public void OnInteractFinish()
+    {
+        ActionManger.InteractAnimFinish?.Invoke();
+    }
 }

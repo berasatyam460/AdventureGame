@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7543116932693388456}
+  - component: {fileID: 6699405939276171616}
   m_Layer: 0
   m_Name: MedievalTorch
   m_TagString: Untagged
@@ -36,6 +37,23 @@ Transform:
   - {fileID: 6955262020812181939}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 62.987, y: -6.194, z: -17.543}
+--- !u!114 &6699405939276171616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871177002828473654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13bf31655d883c0429820d0e88d81fb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  torchLight: {fileID: 4304800095519362157}
+  fireCookieTexture: {fileID: 2800000, guid: 2bbf28be085e6604a8f803011ccf4bce, type: 3}
+  minIntensity: 0.5
+  maxIntensity: 2.5
+  flickerSpeed: 0.2
 --- !u!1 &2621681451035285627
 GameObject:
   m_ObjectHideFlags: 0

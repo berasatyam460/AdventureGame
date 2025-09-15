@@ -10,7 +10,7 @@ public class TestingCubeInteractor : InteractableBase
     [SerializeField] GameObject player;
     private NavMeshAgent playerNavMeshAgent;
     private ThirdPersonController thirdPersonController;
-    private Animator playerAnimator;
+    internal Animator playerAnimator;
     [SerializeField] Transform interactingPoint;
 
     void Awake()
@@ -18,11 +18,15 @@ public class TestingCubeInteractor : InteractableBase
         playerNavMeshAgent = player.GetComponent<NavMeshAgent>();
         thirdPersonController = player.GetComponent<ThirdPersonController>();
         playerAnimator = player.GetComponent<Animator>();
+
+        playerNavMeshAgent.enabled = false;
     }
 
     public override void Interact(GameObject interctingObject)
     {
         base.Interact(interctingObject);
+        ActionManger.headTrackingON(this.gameObject.transform);
+        playerNavMeshAgent.enabled = true;
         float distance = Vector3.Distance(playerNavMeshAgent.transform.position, interactingPoint.position);
 
         if (distance > 0.5f)
@@ -51,7 +55,7 @@ public class TestingCubeInteractor : InteractableBase
 
         }
         playerNavMeshAgent.ResetPath();
-
+        playerNavMeshAgent.enabled = false;
         StartCoroutine(PlayAnim(this.gameObject));
     }
 
@@ -65,4 +69,12 @@ public class TestingCubeInteractor : InteractableBase
         yield return new WaitForSeconds(2f);
         ActionManger.headTrackOff?.Invoke();
     }
+    public virtual void OnInteractFinish()
+    {
+        // To be overridden by derived class if needed
+    }
+
+
 }
+
+

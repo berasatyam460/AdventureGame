@@ -12,13 +12,16 @@ public abstract class InteractableBase : MonoBehaviour, IInteractable
     [SerializeField] private E_Interact_Type interactionType = E_Interact_Type.Press;
 
     private bool isHovered = false;
+    private bool hasInteracted = false;  // NEW: Tracks if interaction happened
 
     public virtual void ShowPointer()
     {
+        if (hasInteracted) return;  // Prevent showing pointer after interaction
+
         if (pointerWidget == null)
         {
             pointerWidget = GetComponentInChildren<InteractPointerWidget>();
-            if (pointerWidget == null) return; //still null then go back
+            if (pointerWidget == null) return;
         }
         pointerWidget.ShowPointerWidget();
     }
@@ -31,15 +34,10 @@ public abstract class InteractableBase : MonoBehaviour, IInteractable
 
     public virtual void Hover()
     {
+        if (hasInteracted) return;  // Prevent hover UI after interaction
         if (pointerWidget == null || isHovered) return;
 
-        pointerWidget.ShowFullPanelStatus(
-            true,
-            interactKey,
-            headerText,
-            toolTipText
-        );
-
+        pointerWidget.ShowFullPanelStatus(true, interactKey, headerText, toolTipText);
         isHovered = true;
     }
 
@@ -53,8 +51,11 @@ public abstract class InteractableBase : MonoBehaviour, IInteractable
 
     public virtual void Interact(GameObject interctingObject)
     {
+        if (hasInteracted) return;  // Prevent multiple interactions
 
-        // To be overridden by derived class if needed
+        hasInteracted = true;  // Mark as interacted
+        HidePointer();
+        // Interaction logic to be overridden in derived classes
     }
 
     public virtual void PushInteractStatus(float status)
@@ -68,7 +69,6 @@ public abstract class InteractableBase : MonoBehaviour, IInteractable
         return interactionType;
     }
 
-    // Optional: Helper to dynamically change text
     protected void UpdateTooltipText(string newText)
     {
         toolTipText = newText;
@@ -76,5 +76,11 @@ public abstract class InteractableBase : MonoBehaviour, IInteractable
         {
             pointerWidget.ShowFullPanelStatus(true, interactKey, headerText, toolTipText);
         }
+    }
+
+    // Optional: Allow external reset of interaction
+    public void ResetInteraction()
+    {
+        hasInteracted = false;
     }
 }

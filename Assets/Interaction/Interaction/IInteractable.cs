@@ -15,4 +15,5 @@ public interface IInteractable
     void Interact(GameObject interactingObject); // Used for Press type
     void PushInteractStatus(float status); // Used for Hold type
     E_Interact_Type GetInteractType();
+    public bool hasIneracted { get; set; }
 }

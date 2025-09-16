@@ -13,7 +13,7 @@ public class TestingCubeInteractor : InteractableBase
     internal Animator playerAnimator;
     [SerializeField] Transform interactingPoint;
 
-    void Awake()
+    internal void Awake()
     {
         playerNavMeshAgent = player.GetComponent<NavMeshAgent>();
         thirdPersonController = player.GetComponent<ThirdPersonController>();
@@ -69,7 +69,7 @@ public class TestingCubeInteractor : InteractableBase
         yield return new WaitForSeconds(2f);
         ActionManger.headTrackOff?.Invoke();
     }
-    public virtual void OnInteractFinish()
+    public virtual void OnInteractFinish(InteractionTypes interactionTypes)
     {
         // To be overridden by derived class if needed
     }

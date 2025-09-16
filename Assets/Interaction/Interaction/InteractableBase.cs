@@ -12,11 +12,13 @@ public abstract class InteractableBase : MonoBehaviour, IInteractable
     [SerializeField] private E_Interact_Type interactionType = E_Interact_Type.Press;
 
     private bool isHovered = false;
-    private bool hasInteracted = false;  // NEW: Tracks if interaction happened
+    private bool hasInteractedBase = false;
+
+    public bool hasIneracted { get => hasInteractedBase; set => hasInteractedBase = value; }
 
     public virtual void ShowPointer()
     {
-        if (hasInteracted) return;  // Prevent showing pointer after interaction
+        if (hasInteractedBase) return;  // Prevent showing pointer after interaction
 
         if (pointerWidget == null)
         {
@@ -34,7 +36,7 @@ public abstract class InteractableBase : MonoBehaviour, IInteractable
 
     public virtual void Hover()
     {
-        if (hasInteracted) return;  // Prevent hover UI after interaction
+        if (hasInteractedBase) return;  // Prevent hover UI after interaction
         if (pointerWidget == null || isHovered) return;
 
         pointerWidget.ShowFullPanelStatus(true, interactKey, headerText, toolTipText);
@@ -51,9 +53,9 @@ public abstract class InteractableBase : MonoBehaviour, IInteractable
 
     public virtual void Interact(GameObject interctingObject)
     {
-        if (hasInteracted) return;  // Prevent multiple interactions
+        if (hasInteractedBase) return;  // Prevent multiple interactions
 
-        hasInteracted = true;  // Mark as interacted
+        hasInteractedBase = true;  // Mark as interacted
         HidePointer();
         // Interaction logic to be overridden in derived classes
     }
@@ -81,6 +83,6 @@ public abstract class InteractableBase : MonoBehaviour, IInteractable
     // Optional: Allow external reset of interaction
     public void ResetInteraction()
     {
-        hasInteracted = false;
+        hasInteractedBase = false;
     }
 }

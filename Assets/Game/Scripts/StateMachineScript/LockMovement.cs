@@ -25,6 +25,7 @@ public class LockMovement : StateMachineBehaviour
         {
             playerinput.enabled = true; // enable movement
             playercontroller._controller.enabled = true;
+            ActionManger.headTrackOff?.Invoke();
 
         }
     }

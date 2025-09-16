@@ -13,7 +13,7 @@ public class Interactor : MonoBehaviour
 
     [Header("Input Settings")]
     public KeyCode interactKey = KeyCode.E;
-    [Range(0.1f,3f)]
+    [Range(0.1f, 3f)]
     public float holdTimeMultiplier = 1f;
 
     private List<IInteractable> currentSphereInteractables = new List<IInteractable>();
@@ -90,28 +90,30 @@ public class Interactor : MonoBehaviour
             return;
 
         E_Interact_Type type = currentRayInteractable.GetInteractType();
-
-        if (type == E_Interact_Type.Press)
+        if (!currentRayInteractable.hasIneracted)
         {
-            if (Input.GetKeyDown(interactKey))
+            if (type == E_Interact_Type.Press)
             {
-                currentRayInteractable.Interact(this.gameObject);
+                if (Input.GetKeyDown(interactKey))
+                {
+                    currentRayInteractable.Interact(this.gameObject);
+                }
             }
-        }
-        else if (type == E_Interact_Type.Hold)
-        {
-            if (Input.GetKey(interactKey))
+            else if (type == E_Interact_Type.Hold)
             {
-                isHolding = true;
-                holdTimer += holdTimeMultiplier * Time.deltaTime;
-                float holdProgress = Mathf.Clamp01(holdTimer / 1f); // Customize max hold duration
-                currentRayInteractable.PushInteractStatus(holdProgress);
-            }
-            else if (isHolding)
-            {
-                isHolding = false;
-                holdTimer = 0f;
-                currentRayInteractable.PushInteractStatus(0f); // Reset hold status
+                if (Input.GetKey(interactKey))
+                {
+                    isHolding = true;
+                    holdTimer += holdTimeMultiplier * Time.deltaTime;
+                    float holdProgress = Mathf.Clamp01(holdTimer / 1f); // Customize max hold duration
+                    currentRayInteractable.PushInteractStatus(holdProgress);
+                }
+                else if (isHolding)
+                {
+                    isHolding = false;
+                    holdTimer = 0f;
+                    currentRayInteractable.PushInteractStatus(0f); // Reset hold status
+                }
             }
         }
     }

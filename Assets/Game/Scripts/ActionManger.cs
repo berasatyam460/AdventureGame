@@ -7,10 +7,16 @@ using UnityEngine.Android;
 public static class ActionManger
 {
     public static Action<bool> DoInteract;
-    public static System.Action<Transform> headTrackingON;
-    public static System.Action headTrackOff;
+    public static Action<Transform> headTrackingON;
+    public static Action headTrackOff;
 
-    public static System.Action<bool, int, GameObject> AnimationType;
+    public static Action<bool, int, GameObject> AnimationType;
 
-    public static Action InteractAnimFinish;
+    public static Action<InteractionTypes> InteractAnimFinish;
+}
+
+public enum InteractionTypes
+{
+    GrabTorch,
+    Ignite
 }

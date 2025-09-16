@@ -7,8 +7,8 @@ public class AnimationEventsManager : MonoBehaviour
         ActionManger.headTrackOff?.Invoke();
     }
 
-    public void OnInteractFinish()
+    public void OnInteractFinish(InteractionTypes interactionTypes)
     {
-        ActionManger.InteractAnimFinish?.Invoke();
+        ActionManger.InteractAnimFinish?.Invoke(interactionTypes);
     }
 }

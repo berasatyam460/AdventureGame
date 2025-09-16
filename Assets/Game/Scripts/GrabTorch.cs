@@ -5,6 +5,7 @@ public class GrabTorch : TestingCubeInteractor
 
     [SerializeField] int layerIndex;
     private float transionSpeed = 0.3f;
+    [SerializeField] InteractionTypes interactionTypes;
     void OnEnable()
     {
         ActionManger.InteractAnimFinish += OnInteractFinish;
@@ -13,10 +14,14 @@ public class GrabTorch : TestingCubeInteractor
     {
         ActionManger.InteractAnimFinish -= OnInteractFinish;
     }
-    public override void OnInteractFinish()
+    public override void OnInteractFinish(InteractionTypes interactionTypes)
     {
-        base.OnInteractFinish();
-        StartCoroutine(SmoothLayerWeight(1));
+        base.OnInteractFinish(interactionTypes);
+        if (this.interactionTypes == interactionTypes)
+        {
+            StartCoroutine(SmoothLayerWeight(1));
+        }
+
 
     }
 

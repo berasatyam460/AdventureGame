@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ActivateQuest : MonoBehaviour
 {
-    [SerializeField] QuestSO questSO;
+    [SerializeField] QuestDataSO questSO;
     [SerializeField] int IDToActivateQuest;
     string shortdes;
     private QuestStatus questStatus = QuestStatus.Initiated;
@@ -11,7 +11,7 @@ public class ActivateQuest : MonoBehaviour
         if (questStatus == QuestStatus.Initiated)
         {
             questStatus = QuestStatus.Running;
-            shortdes = questSO.quests[IDToActivateQuest].ShortQuestDescription;
+            // shortdes = questSO.quests[IDToActivateQuest].Title;
             Debug.Log(shortdes);
         }
     }

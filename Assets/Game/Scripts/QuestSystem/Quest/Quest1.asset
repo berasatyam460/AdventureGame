@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b515af1104452254faef74c2a3796f7c, type: 3}
-  m_Name: New Quest SO
+  m_Name: Quest1
   m_EditorClassIdentifier: 
+  questID: 1
+  Title: Find The Ember Torch
+  LongQuestDescription: Find The Ember Torch
   quests:
-  - QuestID: 1
-    ShortQuestDescription: 'hey fuck you '
-    LongQuestDescription: 
+  - RequiredAmount: 1
+    CurrentAmount: 0
+    objectiveTypes: 0

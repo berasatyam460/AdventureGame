@@ -13,6 +13,15 @@ public static class ActionManger
     public static Action<bool, int, GameObject> AnimationType;
 
     public static Action<InteractionTypes> InteractAnimFinish;
+
+
+
+
+    [Header("QuestTest")]
+    public static Action<QuestDataSO> ActivateQuest;
+    public static Action<QuestDataSO, int, int> UpdateQuestData;
+
+
 }
 
 public enum InteractionTypes

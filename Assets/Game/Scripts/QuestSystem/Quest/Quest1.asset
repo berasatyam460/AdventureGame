@@ -16,6 +16,11 @@ MonoBehaviour:
   Title: Find The Ember Torch
   LongQuestDescription: Find The Ember Torch
   quests:
-  - RequiredAmount: 1
-    CurrentAmount: 0
+  - UniqueQuestId: 0
+    RequiredAmount: 5
+    CurrentAmount: 5
+    objectiveTypes: 0
+  - UniqueQuestId: 0
+    RequiredAmount: 5
+    CurrentAmount: 5
     objectiveTypes: 0

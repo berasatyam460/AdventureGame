@@ -7,7 +7,14 @@ public class QuestManager : MonoBehaviour
 
     void OnEnable()
     {
+        ActionManger.ActivateQuest += ActivateQuest;
+        ActionManger.UpdateQuestData += UpdateQuestStatus;
+    }
 
+    void OnDisable()
+    {
+        ActionManger.ActivateQuest -= ActivateQuest;
+        ActionManger.UpdateQuestData -= UpdateQuestStatus;
     }
 
 
@@ -16,16 +23,32 @@ public class QuestManager : MonoBehaviour
         if (!activeQuests.ContainsKey(questToActive.questID))
         {
             activeQuests.Add(questToActive.questID, questToActive);
-            Debug.Log("QuestsStarted");
+            Debug.Log("QuestsStarted" + questToActive.Title);
         }
     }
 
 
-    private void UpdateQuestStatus(QuestDataSO questToActive, int amount)
+    private void UpdateQuestStatus(QuestDataSO questToActive, int amount, int questNo)
     {
-        foreach (var quest in activeQuests)
+        if (activeQuests.TryGetValue(questToActive.questID, out var quest))
         {
+            if (questNo < quest.quests.Count)
+            {
 
+                if (!quest.IsCompleted())
+                {
+
+                    quest.quests[questNo].CurrentAmount += amount;
+                    Debug.Log($"Updated {quest.Title}: Goal {questNo} → {quest.quests[questNo].CurrentAmount}/{quest.quests[questNo].RequiredAmount}");
+                }
+
+                if (quest.IsCompleted())
+                {
+                    Debug.Log($"Quest Completed: {quest.Title}");
+                    // TODO: give reward
+                }
+            }
         }
     }
+
 }

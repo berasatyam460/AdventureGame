@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b515af1104452254faef74c2a3796f7c, type: 3}
-  m_Name: Quest1
+  m_Name: New Quest Data SO
   m_EditorClassIdentifier: 
-  questID: 1
-  Title: Find and pick The Ember Torch
-  LongQuestDescription: Find The Ember Torch From the forest and pick the torch
+  questID: 2
+  Title: Ignite the torch
+  LongQuestDescription: 
   quests:
   - UniqueQuestId: 0
     RequiredAmount: 1
-    CurrentAmount: 0
+    CurrentAmount: 1
     objectiveTypes: 0

@@ -18,13 +18,8 @@ public class QuestTest : MonoBehaviour
             else
             {
                 ActionManger.UpdateQuestData?.Invoke(questToActive, 1, questNo);
-                Debug.Log("Trigger");
+
             }
         }
     }
-
-
-
-
-
 }

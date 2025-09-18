@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 public class GrabTorch : TestingCubeInteractor
 {
-
+    [SerializeField] QuestClass questClass;
     [SerializeField] int layerIndex;
     private float transionSpeed = 0.3f;
     [SerializeField] InteractionTypes interactionTypes;
@@ -20,7 +20,9 @@ public class GrabTorch : TestingCubeInteractor
         if (this.interactionTypes == interactionTypes)
         {
             StartCoroutine(SmoothLayerWeight(1));
+
         }
+
 
 
     }
@@ -39,6 +41,7 @@ public class GrabTorch : TestingCubeInteractor
         }
 
         playerAnimator.SetLayerWeight(layerIndex, targetWeight);
+        ActionManger.UpdateQuestData?.Invoke(questClass.questData, questClass.amountToChange, questClass.questNo);
     }
 }
 

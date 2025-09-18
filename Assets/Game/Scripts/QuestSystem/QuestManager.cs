@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
-    private readonly Dictionary<int, QuestDataSO> activeQuests = new();
+    public readonly Dictionary<int, QuestDataSO> activeQuests = new();
 
     void OnEnable()
     {
@@ -24,6 +24,7 @@ public class QuestManager : MonoBehaviour
         {
             activeQuests.Add(questToActive.questID, questToActive);
             Debug.Log("QuestsStarted" + questToActive.Title);
+            UIManager.instance.ShowActiveQuestUI(questToActive);
         }
     }
 
@@ -37,14 +38,19 @@ public class QuestManager : MonoBehaviour
 
                 if (!quest.IsCompleted())
                 {
-
-                    quest.quests[questNo].CurrentAmount += amount;
-                    Debug.Log($"Updated {quest.Title}: Goal {questNo} → {quest.quests[questNo].CurrentAmount}/{quest.quests[questNo].RequiredAmount}");
+                    var currentQuest = quest.quests[questNo];
+                    if (currentQuest.CurrentAmount < currentQuest.RequiredAmount)
+                    {
+                        quest.quests[questNo].CurrentAmount += amount;
+                        Debug.Log($"Updated {quest.Title}: Goal {questNo} → {quest.quests[questNo].CurrentAmount}/{quest.quests[questNo].RequiredAmount}");
+                    }
                 }
 
                 if (quest.IsCompleted())
                 {
                     Debug.Log($"Quest Completed: {quest.Title}");
+
+                    UIManager.instance.OnCompleteQuest(questToActive);
                     // TODO: give reward
                 }
             }

@@ -15,7 +15,10 @@ public static class ActionManger
     public static Action<InteractionTypes> InteractAnimFinish;
 
 
-
+    #region  Quest
+    public static Action GiveQuest;
+    public static Action<QuestDataSO, int, int> UpdatingQuestStatus;
+    #endregion
 
     [Header("QuestTest")]
     public static Action<QuestDataSO> ActivateQuest;

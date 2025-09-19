@@ -26,6 +26,22 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void ShowUI()
+    {
+        if (QuestManager.instance.GetActiveQuest() != null)
+        {
+
+            var questDataSo = QuestManager.instance.GetActiveQuest();
+            titleText.text = questDataSo.Title.ToString();
+            descriptionText.text = questDataSo.LongQuestDescription.ToString();
+            questUI.SetActive(true);
+        }
+    }
+    public void HideUI()
+    {
+        questUI.SetActive(false);
+    }
+
 
     public void ShowActiveQuestUI(QuestDataSO questDataSO)
     {

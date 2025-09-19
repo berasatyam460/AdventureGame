@@ -118,6 +118,10 @@ namespace StarterAssets
 
         private bool _hasAnimator;
 
+
+
+
+
         private bool IsCurrentDeviceMouse
         {
             get
@@ -181,6 +185,9 @@ namespace StarterAssets
             GroundedCheck();
             Move();
             OnInteract();
+
+
+
         }
 
         private void LateUpdate()
@@ -449,7 +456,21 @@ namespace StarterAssets
             transform.rotation = targetRot;
         }
 
+        private void OnQuestView()
+        {
+            if (_input.isViewQuest)
+            {
+                Debug.Log("Hide Quest");
+                UIManager.instance.HideUI();
 
+            }
+            else
+            {
+                Debug.Log("View Quest");
+                UIManager.instance.ShowUI();
+
+            }
+        }
 
     }
 

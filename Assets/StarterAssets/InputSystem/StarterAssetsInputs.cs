@@ -13,6 +13,10 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 
+		[Header("QuestView")]
+		public bool isViewQuest;
+
+
 		public bool canInteract;
 
 		[Header("Movement Settings")]
@@ -51,6 +55,19 @@ namespace StarterAssets
 		{
 			InteractInput(value.isPressed);
 		}
+		public void OnQuestView(InputValue value)
+		{
+			if (value.isPressed)
+			{
+				ToggleQuestView();
+			}
+		}
+
+		public void ToggleQuestView()
+		{
+			isViewQuest = !isViewQuest;
+		}
+
 #endif
 
 
@@ -89,6 +106,12 @@ namespace StarterAssets
 			this.canInteract = canInteract;
 
 		}
+		public void QuestViewInput(bool isViewQuest)
+		{
+			this.isViewQuest = isViewQuest;
+		}
+
+
 	}
 
 }

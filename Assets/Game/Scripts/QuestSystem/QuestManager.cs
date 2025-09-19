@@ -1,9 +1,12 @@
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
+    public static QuestManager instance;
     public readonly Dictionary<int, QuestDataSO> activeQuests = new();
+    private bool isQuestActivate;
 
     void OnEnable()
     {
@@ -17,14 +20,20 @@ public class QuestManager : MonoBehaviour
         ActionManger.UpdateQuestData -= UpdateQuestStatus;
     }
 
+    void Awake()
+    {
+        instance = this;
+    }
+
 
     private void ActivateQuest(QuestDataSO questToActive)
     {
-        if (!activeQuests.ContainsKey(questToActive.questID))
+        if (!activeQuests.ContainsKey(questToActive.questID) && !isQuestActivate)
         {
             activeQuests.Add(questToActive.questID, questToActive);
             Debug.Log("QuestsStarted" + questToActive.Title);
             UIManager.instance.ShowActiveQuestUI(questToActive);
+            isQuestActivate = true;
         }
     }
 
@@ -51,10 +60,23 @@ public class QuestManager : MonoBehaviour
                     Debug.Log($"Quest Completed: {quest.Title}");
 
                     UIManager.instance.OnCompleteQuest(questToActive);
+                    isQuestActivate = false;
+                    activeQuests.Remove(quest.questID);
+
                     // TODO: give reward
                 }
             }
         }
+    }
+
+    public QuestDataSO GetActiveQuest()
+    {
+        // return first quest if any
+        foreach (var quest in activeQuests.Values)
+        {
+            return quest; // returns the first one it finds
+        }
+        return null; // no active quest
     }
 
 }

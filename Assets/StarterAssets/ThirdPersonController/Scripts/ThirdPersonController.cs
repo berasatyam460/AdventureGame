@@ -110,7 +110,7 @@ namespace StarterAssets
         private PlayerInput _playerInput;
 #endif
         private Animator _animator;
-        [HideInInspector] public CharacterController _controller;
+        public CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
 
@@ -403,12 +403,17 @@ namespace StarterAssets
 
         private void OnFootstep(AnimationEvent animationEvent)
         {
-            if (animationEvent.animatorClipInfo.weight > 0.5f)
+            if (_controller != null)
             {
-                if (FootstepAudioClips.Length > 0)
+                if (animationEvent.animatorClipInfo.weight > 0.5f)
                 {
-                    var index = Random.Range(0, FootstepAudioClips.Length);
-                    AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), FootstepAudioVolume);
+                    if (FootstepAudioClips.Length > 0)
+                    {
+
+                        var index = Random.Range(0, FootstepAudioClips.Length);
+                        AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), FootstepAudioVolume);
+                    }
+
                 }
             }
         }
